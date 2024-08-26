@@ -1,0 +1,12 @@
+/* Sidebar.css */
+
+.sidebar {
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+  }
+  
+  main {
+    margin-left: 20px; /* Space for the fixed sidebar */
+  }
+  

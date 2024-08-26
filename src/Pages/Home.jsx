@@ -1,0 +1,73 @@
+import { useEffect, useState } from "react"
+import Navbar from "../Components/Navbar/Navbar"
+import axios from "axios"
+import PaymnetDetail from "../Components/PaymnetDetail/PaymnetDetail"
+
+function Home() {
+    const [getPaymentDetails, setGetPaymentDetails] = useState([])
+    useEffect(() => {
+        axios('https://main-server-zeta.vercel.app/getPaymentDetail')
+            .then(async (res) => {
+                setGetPaymentDetails(res.data.response)
+            })
+    }, [])
+    const [modalImage, setModalImage] = useState('');
+
+    const handleImageClick = (imageSrc) => {
+      setModalImage(imageSrc); // Set the image source for the modal
+    };
+    return (
+        <>
+        <div className="sticky-top">
+            <Navbar />
+        </div>
+            <div className="container bordre mt-5">
+                <div className="row">
+                    <div className="col-12">
+                        <table className="table table-border">
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Courses</th>
+                                    <th>Ammount</th>
+                                    <th>payment Image</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    getPaymentDetails.map((data, index) => {
+                                        console.log(data)
+                                        console.log(data)
+                                        return (
+                                            <>
+                                                {/* <div class="modal-dialog modal-dialog-scrollable">
+                                                    ...
+                                                </div> */}
+                                                <tr key={index}>
+                                                    <td>{index + 1}</td>
+                                                    <td>{data.coursesname}</td>
+                                                    <td>{data.amount}</td>
+                                                    <td>
+                                                        <img src={data.image} width={40} alt="" />
+                                                    </td>
+                                                    <td style={{ gap: "10px" }}>
+                                                        <PaymnetDetail data={data}/>
+                                                        {/* <AccessBtn id={data.id} coursesname={data.coursesname} /> */}
+                                                        <button className="btn btn-danger">Denied</button>
+                                                    </td>
+                                                </tr>
+                                            </>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default Home
