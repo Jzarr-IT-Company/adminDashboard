@@ -11,7 +11,7 @@ function AccessBtn({ id, coursesname }) {
 
         try {
             // Example API call to update the course's isActive status
-            const response = await axios.post('http://localhost:8888/updateIsActive', {
+            const response = await axios.post('https://main-server-zeta.vercel.app/updateIsActive', {
                 id: id,
                 coursename: courseName // Use the individual course name here
             });
