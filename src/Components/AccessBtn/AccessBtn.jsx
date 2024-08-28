@@ -1,31 +1,40 @@
 import React from 'react';
 import axios from 'axios';
 
-function AccessBtn({ id, coursesname }) {
+function AccessBtn({ coursesname }) {
     // Convert the comma-separated string into an array
-    const coursesArray = coursesname.split(',');
+    // const coursesArray = coursesname.split(',');
 
     // Function to handle the API call or any action for each course
-    const accessBtn = async (courseName) => {
+    const accessBtn = async (id, courseName) => {
         console.log(`Processing course: ${courseName}`);
+        console.log(`Processing course id: ${id}`);
 
         try {
-            // Example API call to update the course's isActive status
-            const response = await axios.post('https://main-server-zeta.vercel.app/updateIsActive', {
+
+            axios.post('https://main-server-zeta.vercel.app/updateIsActive', {
                 id: id,
-                coursename: courseName // Use the individual course name here
-            });
-            console.log('API Response:', response);
+            }).then((res) => {
+                if (res.status === 200) {
+                    axios.post('https://main-server-zeta.vercel.app/updateCourses', {
+                        id: id,
+                        coursename: courseName
+
+                    }).then((res) => {
+                        console.log(res)
+                    })
+                }
+            })
         } catch (error) {
             console.error('Error updating course:', error);
         }
     };
 
-    // Function to handle the button click
+    // // Function to handle the button click
     const handleButtonClick = () => {
-        coursesArray.forEach((courseName) => {
-            accessBtn(courseName); // Call accessBtn for each course name
-        });
+        console.log(coursesname)
+        accessBtn(coursesname.id, coursesname.coursesname); // Call accessBtn for each course name
+
     };
 
     return (

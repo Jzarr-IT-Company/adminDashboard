@@ -7,7 +7,9 @@ function PaymnetDetail({ data }) {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    console.log("DATA",data)
+    // const handleShow = () => {
+    //     console.log("DATA",data)
+    // };
 
     return (
         <>
@@ -27,7 +29,7 @@ function PaymnetDetail({ data }) {
                         Close
                     </Button>
                     <Button variant="success" onClick={handleClose}>
-                        <AccessBtn id={data.id} coursesname={data.coursesname} />
+                        <AccessBtn  coursesname={data} />
                     </Button>
                 </Modal.Footer>
             </Modal>

@@ -6,9 +6,10 @@ import PaymnetDetail from "../Components/PaymnetDetail/PaymnetDetail"
 function Home() {
     const [getPaymentDetails, setGetPaymentDetails] = useState([])
     useEffect(() => {
-        axios('https://main-server-zeta.vercel.app/getPaymentDetail')
+        axios('http://localhost:8888/getPaymentDetail')
             .then(async (res) => {
                 setGetPaymentDetails(res.data.response)
+                console.log("PAYMENT DATA",res.data.response)
             })
     }, [])
     const [modalImage, setModalImage] = useState('');
@@ -38,12 +39,8 @@ function Home() {
                                 {
                                     getPaymentDetails.map((data, index) => {
                                         console.log(data)
-                                        console.log(data)
                                         return (
                                             <>
-                                                {/* <div class="modal-dialog modal-dialog-scrollable">
-                                                    ...
-                                                </div> */}
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{data.coursesname}</td>
