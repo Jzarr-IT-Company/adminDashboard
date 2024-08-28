@@ -8,7 +8,7 @@ import AccessBtn from "../Components/AccessBtn/AccessBtn"
 function Home() {
     const [getPaymentDetails, setGetPaymentDetails] = useState([])
     useEffect(() => {
-        axios('http://localhost:8888/getPaymentDetail')
+        axios('https://main-server-zeta.vercel.app/getPaymentDetail')
             .then(async (res) => {
                 setGetPaymentDetails(res.data.response)
                 console.log("PAYMENT DATA", res.data.response)
