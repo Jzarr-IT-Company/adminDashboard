@@ -22,7 +22,7 @@ function PaymnetDetail({ data }) {
                     <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <img src={data.image} className='img-fluid' alt="" />
+                    {/* <img src={data.image} className='img-fluid' alt="" /> */}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

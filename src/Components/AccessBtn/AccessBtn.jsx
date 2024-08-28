@@ -12,11 +12,11 @@ function AccessBtn({ coursesname }) {
 
         try {
 
-            axios.post('https://main-server-zeta.vercel.app/updateIsActive', {
+            axios.post('http://localhost:8888/updateIsActive', {
                 id: id,
             }).then((res) => {
                 if (res.status === 200) {
-                    axios.post('https://main-server-zeta.vercel.app/updateCourses', {
+                    axios.post('http://localhost:8888/updateCourses', {
                         id: id,
                         coursename: courseName
 
