@@ -1,46 +1,91 @@
-import React from 'react';
+// import React, { useState } from 'react';
+// import axios from 'axios';
+
+// function AccessBtn({ coursesname }) {
+//     const [loading, setLoading] = useState(false)
+//     const accessBtn = async (data) => {
+//         setLoading(true)
+//         try {
+//             axios.post('https://main-server-zeta.vercel.app/updateIsActive', {
+//                 id: data.id,
+//             }).then((res) => {
+//                 if (res.status === 200) {
+//                     axios.post('https://main-server-zeta.vercel.app/updateCourses', {
+//                         id: data.id,
+//                         coursename: data.coursesname
+//                     }).then((res) => {
+//                         console.log("DATA UPDATE", res)
+//                         if (res.status === 200) {
+//                             setLoading(false)
+//                             return;
+//                         }
+//                     }).catch((error) => {
+//                         setLoading(false)
+//                         console.log("ERROR", error.message)
+//                     })
+//                 }
+//             }).catch((error) => {
+//                 setLoading(false)
+//                 console.log("ERROR", error.message)
+//             })
+//         } catch (error) {
+//             setLoading(false)
+//             console.error('Error updating course:', error.message);
+//         } finally {
+//             setLoading(false)
+//         }
+//     };
+
+//     const handleButtonClick = () => {
+//         console.log(coursesname)
+//         accessBtn(coursesname); 
+//     };
+
+//     return (
+//         <>
+//             <button className="btn btn-success" onClick={handleButtonClick}> {loading ? "Loading" : "Access"}</button>
+//         </>
+//     );
+// }
+
+// export default AccessBtn;
+
+
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function AccessBtn({ coursesname }) {
-    // Convert the comma-separated string into an array
-    // const coursesArray = coursesname.split(',');
+    const [loading, setLoading] = useState(false);
 
-    // Function to handle the API call or any action for each course
-    const accessBtn = async (id, courseName) => {
-        console.log(`Processing course: ${courseName}`);
-        console.log(`Processing course id: ${id}`);
-
+    const accessBtn = async (data) => {
+        setLoading(true);
         try {
+            await axios.post('https://main-server-zeta.vercel.app/updateIsActive', {
+                id: data.id,
+            });
 
-            axios.post('https://main-server-zeta.vercel.app/updateIsActive', {
-                id: id,
-            }).then((res) => {
-                if (res.status === 200) {
-                    axios.post('https://main-server-zeta.vercel.app/updateCourses', {
-                        id: id,
-                        coursename: courseName
+            const response = await axios.post('https://main-server-zeta.vercel.app/updateCourses', {
+                id: data.id,
+                coursename: data.coursesname
+            });
 
-                    }).then((res) => {
-                        console.log(res)
-                    })
-                }
-            })
+            console.log("DATA UPDATE", response);
         } catch (error) {
-            console.error('Error updating course:', error);
+            console.error('Error updating course:', error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
-    // // Function to handle the button click
     const handleButtonClick = () => {
-        console.log(coursesname)
-        accessBtn(coursesname.id, coursesname.coursesname); // Call accessBtn for each course name
-
+        console.log(coursesname);
+        accessBtn(coursesname);
     };
 
     return (
-        <>
-            <button className="btn btn-success" onClick={handleButtonClick}>Access</button>
-        </>
+        <button className="btn btn-success" onClick={handleButtonClick}>
+            {loading ? "Loading" : "Access"}
+        </button>
     );
 }
 

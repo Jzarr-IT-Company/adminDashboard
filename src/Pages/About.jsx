@@ -5,8 +5,8 @@ import Sidebar from '../Components/Sidebar/Sidebar'
 function About() {
   return (
     <>
-        {/* <Navbar/> */}
-        {/* <Sidebar/> */}
+        <Navbar/>
+        <Sidebar/>
         <p>About</p>
     </>
   )

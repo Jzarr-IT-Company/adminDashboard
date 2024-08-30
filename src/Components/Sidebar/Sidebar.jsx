@@ -1,36 +1,28 @@
 import React from 'react'
 import Navbar from '../Navbar/Navbar'
-import { Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
+import SidebarMenu from '../SidebarMenu/SidebarMenu'
+import './navbarSidebar.css'
 
-function Sidebar(children) {
-  return (
-    <>
-    <div className="sticky-top">
-        <Navbar/>
-    </div>
-        <div className="container-fluid" >
-            <div className="row position-fixed" style={{overflow:"auto"}}>
-                <div className="col-lg-3 col-md-3 border">
-                    <div className="py-2">
-                        <Link className='btn btn-primary w-100 text-start py-3' to={'/'}>Home</Link>
-                    </div>
-                    <div className="py-2">
-                        <Link className='btn btn-primary w-100 text-start py-3' to={'/a'}>About</Link>
-                    </div>
-                    <div className="py-2">
-                        <Link className='btn btn-primary w-100 text-start py-3'>Home</Link>
-                    </div>
-                    <div className="py-2">
-                        <Link className='btn btn-primary w-100 text-start py-3'>Home</Link>
-                    </div>
-                </div>
-                <main className="col-lg-8" style={{paddingLeft: '50px', height: '100vh', overflowY: 'auto'}}>
-                    {children.children}
-                </main>
+function Sidebar() {
+    return (
+        <>
+            <div className="sticky-top">
+                <Navbar />
             </div>
-        </div>
-    </>
-  )
+            <div className="container-fluid">
+                <div className="row" >
+                    <div className="col-lg-2 col-md-3 p-0 side-bar">
+                        <SidebarMenu />
+                    </div>
+                    <main className="col-lg-10 border overflow-auto main-content" style={{ height: '100%' }}>
+                        <Outlet />
+                    </main>
+                </div>
+            </div>
+
+        </>
+    )
 }
 
 export default Sidebar
