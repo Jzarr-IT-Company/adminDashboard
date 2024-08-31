@@ -94,6 +94,7 @@ function Payment() {
     useEffect(() => {
         axios('https://main-server-zeta.vercel.app/getPaymentDetail')
             .then(res => {
+                console.log(res.data.response)
                 setGetPaymentDetails(res.data.response);
             });
     }, []);
