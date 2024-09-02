@@ -7,9 +7,10 @@
 /* Fixed Sidebar for larger screens col-lg-3*/
 .side-bar {
   position: fixed;
-  top: 97px; 
+  top: 60px; 
   height: calc(100vh - 100px); 
-  overflow: auto; 
+  overflow: auto;
+  /* border: 1px solid;  */
 }
 
 /* Adjust main content when sidebar is fixed on larger screens col-lg-9*/

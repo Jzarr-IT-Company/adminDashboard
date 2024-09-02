@@ -12,7 +12,7 @@ function Sidebar() {
             </div>
             <div className="container-fluid">
                 <div className="row" >
-                    <div className="col-lg-2 col-md-3 p-0 side-bar">
+                    <div className="col-lg-2 col-md-3 p-0 side-bar  border-left">
                         <SidebarMenu />
                     </div>
                     <main className="col-lg-10 border overflow-auto main-content" style={{ height: '100%' }}>

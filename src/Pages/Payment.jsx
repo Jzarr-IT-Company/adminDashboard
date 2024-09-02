@@ -94,12 +94,11 @@ function Payment() {
     useEffect(() => {
         axios('https://main-server-zeta.vercel.app/getPaymentDetail')
             .then(res => {
-                console.log(res.data.response)
                 setGetPaymentDetails(res.data.response);
             });
     }, []);
     const handleDeleteClick = (id) => {
-        axios.delete(`http://localhost:8888/deletePaymnet/${id}`)
+        axios.delete(`https://main-server-zeta.vercel.app/deletePaymnet/${id}`)
             .then((res) => {
                 setGetPaymentDetails(prevDetails => prevDetails.filter(item => item._id !== id));
             })
@@ -111,6 +110,7 @@ function Payment() {
 
     const columns = [
         { field: 'id', headerName: 'S.no', width: 90 },
+        { field: 'name', headerName: 'Name', width: 200 },
         { field: 'coursesname', headerName: 'Courses', width: 200 },
         { field: 'amount', headerName: 'Amount', width: 150 },
         { field: 'paymentMethod', headerName: 'Payment Method', width: 150 },
@@ -156,7 +156,8 @@ function Payment() {
     ];
 
     const rows = getPaymentDetails.map((data, index) => ({
-        id: index + 1, // Assuming _id is present; use index as fallback
+        id: index + 1, 
+        name:data.name,
         coursesname: data.coursesname,
         amount: data.amount,
         image: data.image,
