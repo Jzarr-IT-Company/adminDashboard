@@ -24,32 +24,18 @@ const App = () => {
   let phyToken = Cookie.get('physToken')
   console.log(dashToken)
   const router = createBrowserRouter([
-    // {
-    //   path: "/",
-    //   element: <Sidebar />,
-    //   children: [
-    //     {
-    //       path: '/',
-    //       element: userToken || dashToken ? <Home /> : <Navigate to="/login" />
-    //     },
-    //     { path: '/payment', element: paymToken || paymtToken ? <Payment /> : <Navigate to="/plogin" /> },
-    //     { path: '/faqs', element: faqsToken || supporToken ? <FAQS /> : <Navigate to="/flogin" /> },
-    //     { path: '/phy', element:physToken|| phyToken ? <PhysicalClassStudents /> : <Navigate to="/phlogin" /> },
-    //     { path: '/setting', element: settToken || settiToken ? <Setting /> : <Navigate to="/slogin" /> },
-    //   ],
-    // },
     {
       path: "/",
       element: <Sidebar />,
-      children: [
+      children:[
         {
           path: '/',
-          element: <Home />
+          element: userToken || dashToken ? <Home /> : <Navigate to="/login" />
         },
-        { path: '/payment', element: <Payment /> },
-        { path: '/faqs', element: <FAQS /> },
-        { path: '/phy', element: <PhysicalClassStudents /> },
-        { path: '/setting', element: <Setting /> },
+        { path: '/payment', element: paymToken || paymtToken ? <Payment /> : <Navigate to="/plogin" /> },
+        { path: '/faqs', element: faqsToken || supporToken ? <FAQS /> : <Navigate to="/flogin" /> },
+        { path: '/phy', element:physToken|| phyToken ? <PhysicalClassStudents /> : <Navigate to="/phlogin" /> },
+        { path: '/setting', element: settToken || settiToken ? <Setting /> : <Navigate to="/slogin" /> },
       ],
     },
     {
