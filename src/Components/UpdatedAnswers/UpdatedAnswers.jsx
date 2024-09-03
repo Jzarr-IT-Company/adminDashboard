@@ -73,7 +73,7 @@ function UpdatedAnswers({ id, onUpdate }) {
 
     const handle = async () => {
         try {
-            const response = await axios.post('http://localhost:4040/updateAnswer', {
+            const response = await axios.post('https://admin-portal-server.vercel.app/updateAnswer', {
                 id: id,
                 answer: getAnswer
             });

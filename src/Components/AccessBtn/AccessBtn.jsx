@@ -60,11 +60,11 @@ function AccessBtn({ coursesname }) {
     const accessBtn = async (data) => {
         setLoading(true);
         try {
-            await axios.post('https://main-server-zeta.vercel.app/updateIsActive', {
+            await axios.post('https://admin-portal-server.vercel.app/updateIsActive', {
                 id: data.id,
             });
 
-            const response = await axios.post('https://main-server-zeta.vercel.app/updateCourses', {
+            const response = await axios.post('https://admin-portal-server.vercel.app/updateCourses', {
                 id: data.id,
                 coursename: data.coursesname
             });

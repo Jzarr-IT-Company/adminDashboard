@@ -19,7 +19,7 @@ function PhysicalClassStudents() {
     }, []);
 
     const handleButtonClick = (id) => {
-        axios.delete(`https://main-server-zeta.vercel.app/deleteData/${id}`)
+        axios.delete(`https://admin-portal-server.vercel.app/deleteData/${id}`)
             .then((res) => {
                 setGetPaymentDetails((prevDetails) => prevDetails.filter(item => item._id !== id));
             })

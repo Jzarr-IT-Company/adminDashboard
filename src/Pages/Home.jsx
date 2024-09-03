@@ -11,14 +11,14 @@ function Home() {
     const [pageSize, setPageSize] = useState(20);
 
     useEffect(() => {
-        axios('https://main-server-zeta.vercel.app/getAllStudentsdata')
+        axios('https://admin-portal-server.vercel.app/getAllStudentsdata')
             .then(async (res) => {
                 setGetPaymentDetails(res.data.data);
             });
     }, []);
 
     const handleButtonClick = (id) => {
-        axios.delete(`https://main-server-zeta.vercel.app/deleteData/${id}`)
+        axios.delete(`https://admin-portal-server.vercel.app/deleteData/${id}`)
             .then((res) => {
                 setGetPaymentDetails((prevDetails) => prevDetails.filter(item => item._id !== id));
             })

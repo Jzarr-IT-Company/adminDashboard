@@ -105,7 +105,7 @@ function Faqs() {
     const [pageSize, setPageSize] = useState(20);
 
     useEffect(() => {
-        axios('https://main-server-zeta.vercel.app/getFAQS')
+        axios('https://admin-portal-server.vercel.app/getFAQS')
             .then((res) => {
                 console.log(res.data.data);
                 setGetPaymentDetails(res.data.data);
@@ -115,7 +115,7 @@ function Faqs() {
     }, []);
 
     const handleButtonClick = (id) => {
-        axios.delete(`https://main-server-zeta.vercel.app/deleteFAQS/${id}`)
+        axios.delete(`https://admin-portal-server.vercel.app/deleteFAQS/${id}`)
             .then((response) => {
                 console.log(response)
                 setGetPaymentDetails((prevDetails) => prevDetails.filter(item => item._id !== id));

@@ -154,6 +154,9 @@ function Payment() {
             ),
         },
     ];
+    getPaymentDetails.map((data)=>{
+        console.log(data)
+    })
 
     const rows = getPaymentDetails.map((data, index) => ({
         id: index + 1, 
