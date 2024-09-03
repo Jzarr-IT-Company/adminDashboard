@@ -97,16 +97,16 @@ function Payment() {
                 setGetPaymentDetails(res.data.response);
             });
     }, []);
-    const handleDeleteClick = (id) => {
-        axios.delete(`https://main-server-zeta.vercel.app/deletePaymnet/${id}`)
-            .then((res) => {
-                setGetPaymentDetails(prevDetails => prevDetails.filter(item => item._id !== id));
-            })
-            .catch(error => {
-                console.error("Error deleting data:", error);
-                // 
-            });
-    };
+    // const handleDeleteClick = (id) => {
+    //     axios.delete(`https://main-server-zeta.vercel.app/deletePaymnet/${id}`)
+    //         .then((res) => {
+    //             setGetPaymentDetails(prevDetails => prevDetails.filter(item => item._id !== id));
+    //         })
+    //         .catch(error => {
+    //             console.error("Error deleting data:", error);
+    //             // 
+    //         });
+    // };
 
     const columns = [
         { field: 'id', headerName: 'S.no', width: 90 },
@@ -138,21 +138,22 @@ function Payment() {
                     <AccessBtn coursesname={params.row.data} />
                 </>
             ),
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            width: 150,
-            renderCell: (params) => (
-                <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => handleDeleteClick(params.row.userId)}
-                >
-                    Delete
-                </Button>
-            ),
-        },
+        }
+        // ,
+        // {
+        //     field: 'Denied',
+        //     headerName: 'Denied',
+        //     width: 150,
+        //     renderCell: (params) => (
+        //         <Button
+        //             variant="contained"
+        //             color="error"
+        //             onClick={() => handleDeleteClick(params.row.userId)}
+        //         >
+        //             Access Denied
+        //         </Button>
+        //     ),
+        // },
     ];
     getPaymentDetails.map((data)=>{
         console.log(data)

@@ -9,16 +9,15 @@ import * as XLSX from 'xlsx';
 function Home() {
     const [getPaymentDetails, setGetPaymentDetails] = useState([]);
     const [pageSize, setPageSize] = useState(20);
-
     useEffect(() => {
-        axios('https://admin-portal-server.vercel.app/getAllStudentsdata')
+        axios('https://main-server-zeta.vercel.app/getAllStudentsdata')
             .then(async (res) => {
                 setGetPaymentDetails(res.data.data);
             });
     }, []);
 
     const handleButtonClick = (id) => {
-        axios.delete(`https://admin-portal-server.vercel.app/deleteData/${id}`)
+        axios.delete(`https://main-server-zeta.vercel.app/deleteData/${id}`)
             .then((res) => {
                 setGetPaymentDetails((prevDetails) => prevDetails.filter(item => item._id !== id));
             })

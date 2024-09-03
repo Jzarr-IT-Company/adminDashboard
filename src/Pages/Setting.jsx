@@ -1,15 +1,23 @@
 import React from 'react'
-
+import DashboardPasswordChangeComp from '../Components/DashboardPasswordChangeComp/DashboardPasswordChangeComp'
+import Cookies from "js-cookie"
+import { useNavigate } from 'react-router-dom'
 function Setting() {
+  const navigate = useNavigate()
+  const handle = async () => {
+    Cookies.remove("dashToken")
+    Cookies.remove("dashId")
+    navigate('/login')
+  }
   return (
     <>
-        <div className="container">
-            <div className="row">
-                <div className="">
-                    Setting
-                </div>
-            </div>
+      <div className="container py-5 px-5">
+        <h3 className='mb-3'>Setting</h3>
+        <div className="row">
+          <DashboardPasswordChangeComp />
+          <button onClick={handle}>delete</button>
         </div>
+      </div>
     </>
   )
 }

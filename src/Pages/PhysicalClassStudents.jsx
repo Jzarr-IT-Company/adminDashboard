@@ -75,7 +75,7 @@ function PhysicalClassStudents() {
         <>
             <div className="container-fluid mt-5">
                 <div className="d-flex justify-content-between">
-                    <h4>All Students</h4>
+                    <h4>Physical Students</h4>
                     <Button
                         variant="contained"
                         color="primary"
