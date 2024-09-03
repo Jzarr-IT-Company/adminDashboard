@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { message } from 'antd';
 
 function AccessBtn({ coursesname }) {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const accessBtn = async (data) => {
-        setLoading(true)
+        setLoading(true);
         try {
             axios.post('https://main-server-zeta.vercel.app/updateIsActive', {
                 id: data.id,
@@ -16,7 +17,8 @@ function AccessBtn({ coursesname }) {
                     }).then((res) => {
                         console.log("DATA UPDATE", res)
                         if (res.status === 200) {
-                            setLoading(false)
+                            message.success(`${data.coursesname} Access Done`)
+                            // .success(`${file.name} uploaded successfully!`);
                             return;
                         }
                     }).catch((error) => {
