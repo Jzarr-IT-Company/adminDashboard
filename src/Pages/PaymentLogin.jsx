@@ -13,7 +13,7 @@ function PaymentLogin() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:4040/paymentLoginPasswordCheck', { password, email });
+      const response = await axios.post('https://admin-portal-server.vercel.app/paymentLoginPasswordCheck', { password, email });
 
       if (response.data.status === 200) {
         alert("SUUCESSFULLY")

@@ -12,7 +12,7 @@ function SettingLogin() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:4040/paymentLoginPasswordCheck', { password, email });
+      const response = await axios.post('https://admin-portal-server.vercel.app/settingLoginPasswordCheck', { password, email });
 
       if (response.data.status === 200) {
         alert("SUUCESSFULLY")
@@ -20,7 +20,7 @@ function SettingLogin() {
         setSettToken(response.data.token)
         Cookies.set('settId', response.data.id);
         Cookies.set('settToken', response.data.token);
-        navigate('/payment');
+        navigate('/setting');
       }
     } catch (error) {
       if (error.response && error.response.data.status === 404) {

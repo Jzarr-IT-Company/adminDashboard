@@ -7,6 +7,10 @@ function Setting() {
   const handle = async () => {
     Cookies.remove("dashToken")
     Cookies.remove("dashId")
+    Cookies.remove("paymToken")
+    Cookies.remove("supportToken")
+    Cookies.remove("settToken")
+    Cookies.remove("physToken")
     navigate('/login')
   }
   return (

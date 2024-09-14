@@ -9,9 +9,11 @@ import * as XLSX from 'xlsx';
 function Home() {
     const [getPaymentDetails, setGetPaymentDetails] = useState([]);
     const [pageSize, setPageSize] = useState(20);
+    const [coursename, setcourseName] = useState([])
     useEffect(() => {
         axios('https://main-server-zeta.vercel.app/getAllStudentsdata')
             .then(async (res) => {
+                console.log(res.data.data)
                 setGetPaymentDetails(res.data.data);
             });
     }, []);
@@ -29,6 +31,7 @@ function Home() {
     const columns = [
         { field: 'id', headerName: 'S.no', width: 90 },
         { field: 'name', headerName: 'Name', width: 200 },
+        { field: 'course', headerName: 'Course', width: 200 },
         { field: 'email', headerName: 'Email', width: 250 },
         { field: 'phone', headerName: 'Phone Number', width: 200 },
         {
@@ -49,21 +52,50 @@ function Home() {
     const rows = getPaymentDetails.map((data, index) => ({
         id: index + 1,
         name: data.name,
+        course: data.courses,
         email: data.email,
         phone: data.phone,
         dataId: data._id
     }));
+    // const handleExportClick = () => {
+    //     // const dataToExport = getPaymentDetails.map(data => ({
+    //     //     Name: data.name,
+    //     //     Courses: data.courses,
+    //     //     Email: data.email,
+    //     //     Phone: data.phone
+    //     // }));
+    //     // const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    //     // const workbook = XLSX.utils.book_new();
+    //     // XLSX.utils.book_append_sheet(workbook, worksheet, "StudentsData");
+    //     // XLSX.writeFile(workbook, "StudentsData.xlsx");
+    //     getPaymentDetails.map(data => {
+    //         console.log(data.courses)
+    //     });
+    // };
+
     const handleExportClick = () => {
+        // const dataToExport = getPaymentDetails.map(data => ({
+        //     Name: data.name,
+        //     Courses: data.courses.map(course => `Course Name: ${course.courseName}`),  // Format each course with details
+        //     Email: data.email,
+        //     Phone: data.phone
+        // }));
+        const courses = getPaymentDetails.map(data => {
+            console.log(data.courses)
+        });
         const dataToExport = getPaymentDetails.map(data => ({
             Name: data.name,
+            // Courses: data.courses.map(course => course.courseName),  // Format each course with details
             Email: data.email,
             Phone: data.phone
         }));
-        const worksheet = XLSX.utils.json_to_sheet(dataToExport);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "StudentsData");
-        XLSX.writeFile(workbook, "StudentsData.xlsx");
+        console.log(dataToExport)
+        // const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+        // const workbook = XLSX.utils.book_new();
+        // XLSX.utils.book_append_sheet(workbook, worksheet, "StudentsData");
+        // XLSX.writeFile(workbook, "StudentsData.xlsx");
     };
+
     return (
         <>
             <div className="container-fluid mt-5">

@@ -112,6 +112,7 @@ function Payment() {
         { field: 'id', headerName: 'S.no', width: 90 },
         { field: 'name', headerName: 'Name', width: 200 },
         { field: 'coursesname', headerName: 'Courses', width: 200 },
+        { field: 'phone', headerName: 'Phone', width: 200 },
         { field: 'amount', headerName: 'Amount', width: 150 },
         { field: 'paymentMethod', headerName: 'Payment Method', width: 150 },
         {
@@ -163,16 +164,20 @@ function Payment() {
         id: index + 1, 
         name:data.name,
         coursesname: data.coursesname,
+        phone:data.phone,
         amount: data.amount,
         image: data.image,
         userId: data._id,
         data: data,
         paymentMethod: data.paymenttype
     }));
-
+console.log()
     const handleExportClick = () => {
         const dataToExport = getPaymentDetails.map(data => ({
+            name:data.name,
+            email,
             Courses: data.coursesname,
+            Phone:data.phone,
             Amount: data.amount,
         }));
         const worksheet = XLSX.utils.json_to_sheet(dataToExport);

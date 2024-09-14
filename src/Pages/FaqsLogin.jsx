@@ -25,7 +25,7 @@ function FaqsLogin() {
       if (error.response && error.response.data.status === 404) {
         console.error("ERROR FROM ADMIN DASHBOARD", error.response.data.message);
       } else {
-        console.error("An error occurred while logging in", error);
+        console.error("An error occurred while logging in", error.message);
       }
     }
   };
