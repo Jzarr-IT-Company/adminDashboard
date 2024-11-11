@@ -1,12 +1,11 @@
 import { Spin } from 'antd'
 import axios from 'axios'
 import React, { useState } from 'react'
-
-function DashboardAcountDelete({ id, done }) {
+function DashboardPhysicalAccessDelete({ id, done }) {
     const [loading, setLoading] = useState(false)
     const handle = async () => {
         setLoading(true)
-        axios.delete(`http://localhost:4040/deleteAccount/${id}`)
+        axios.delete(`http://localhost:4040/deleteUser/${id}`)
             .then(res => {
                 if (res.data.status === 200) {
                     setLoading(false)
@@ -23,4 +22,4 @@ function DashboardAcountDelete({ id, done }) {
     )
 }
 
-export default DashboardAcountDelete
+export default DashboardPhysicalAccessDelete

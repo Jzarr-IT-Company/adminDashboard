@@ -15,6 +15,7 @@ import PaymentLogin from "./Pages/PaymentLogin";
 import SettingLogin from "./Pages/SettingLogin";
 import FaqsLogin from "./Pages/FaqsLogin";
 import PhysicalLogin from "./Pages/PhysicalLogin";
+import CheckAllImages from "./Pages/CheckAllImages";
 const App = () => {
   const { userToken, settToken, paymToken, physToken, faqsToken, } = useGlobalState()
   let dashToken = Cookie.get('dashToken')
@@ -50,6 +51,7 @@ const App = () => {
         { path: '/faqs', element:  <FAQS />  },
         { path: '/phy', element: <PhysicalClassStudents />  },
         { path: '/setting', element:   <Setting />  },
+        { path: '/check', element:   <CheckAllImages />  },
       ],
     },
     {

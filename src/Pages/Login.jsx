@@ -14,7 +14,7 @@ function Login() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:4040/dashboardLoginPasswordCheck', { password, email });
+            const response = await axios.post('http://localhost:4040/dashboardLoginPasswordCheck', { password:password, email:email });
             
             if (response.data.status === 200) {
                 alert("SUUCESSFULLY")

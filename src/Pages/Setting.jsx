@@ -2,6 +2,7 @@ import React from 'react'
 import DashboardPasswordChangeComp from '../Components/DashboardPasswordChangeComp/DashboardPasswordChangeComp'
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom'
+import PhysicalclassDashboard from '../Components/PhysicalclassDashboard/PhysicalclassDashboard'
 function Setting() {
   const navigate = useNavigate()
   const handle = async () => {
@@ -19,6 +20,7 @@ function Setting() {
         <h3 className='mb-3'>Setting</h3>
         <div className="row">
           <DashboardPasswordChangeComp />
+          <PhysicalclassDashboard/>
           <button onClick={handle}>delete</button>
         </div>
       </div>

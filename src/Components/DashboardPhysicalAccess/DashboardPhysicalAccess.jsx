@@ -3,8 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
-function DashboardAddAccount({done}) {
+function DashboardPhysicalAccess({done}) {
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
@@ -20,7 +19,7 @@ function DashboardAddAccount({done}) {
         if (email && password) {
             try {
                 // name, email, password, phone
-                axios.post('http://localhost:4040/dashboardLogin', { name: name, email: email, password: password, phone: phone })
+                axios.post('http://localhost:4040/addPhysicalClassDashboardAccessData', { name: name, email: email, password: password, phone: phone })
                     .then((res) => {
                         console.log(res)
                         if (res.data.status === 200) {
@@ -60,7 +59,7 @@ function DashboardAddAccount({done}) {
                             <input type="email" placeholder='example@gmail.com' value={email} className='form-control py-3' onChange={(e) => { setEmail(e.target.value) }} />
                         </div>
                         <div className="">
-                            <p>Phone</p>
+                            <p>passowrd</p>
                             <input type="password" placeholder='***********' value={password} className='form-control py-3 mt-3' onChange={(e) => { setPassword(e.target.value) }} />
                         </div>
                         <div className="">
@@ -82,4 +81,4 @@ function DashboardAddAccount({done}) {
     );
 }
 
-export default DashboardAddAccount
+export default DashboardPhysicalAccess

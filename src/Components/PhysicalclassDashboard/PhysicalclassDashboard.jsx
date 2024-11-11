@@ -6,17 +6,19 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import DashboardChangeEmail from '../DashboardChangeEmail/DashboardChangeEmail';
 import DashboardAcountDelete from '../DashboardAcountDelete/DashboardAcountDelete';
-function DashboardPasswordChangeComp() {
+import DashboardPhysicalAccess from '../DashboardPhysicalAccess/DashboardPhysicalAccess';
+import DashboardPhysicalAccessDelete from '../DashboardPhysicalAccessDelete/DashboardPhysicalAccessDelete';
+function PhysicalclassDashboard() {
     const [getPaymentDetails, setGetPaymentDetails] = useState([]);
     const [pageSize, setPageSize] = useState(20);
     useEffect(() => {
-        axios('http://localhost:4040/getDashboardAccessData')
+        axios('http://localhost:4040/getPhysicalClassDashboardAccess')
             .then(async (res) => {
                 setGetPaymentDetails(res.data.data);
             });
     }, []);
     const done = () => {
-        axios('http://localhost:4040/getDashboardAccessData')
+        axios('http://localhost:4040/getPhysicalClassDashboardAccess')
             .then(async (res) => {
                 setGetPaymentDetails(res.data.data);
             });
@@ -31,7 +33,7 @@ function DashboardPasswordChangeComp() {
             headerName: 'Change Password',
             width: 150,
             renderCell: (params) => (
-                <DashboardChangePassword />
+                <button className='btn btn-primary'>change password</button>
             ),
         },
         {
@@ -39,7 +41,7 @@ function DashboardPasswordChangeComp() {
             headerName: 'Change Email',
             width: 150,
             renderCell: (params) => (
-                <DashboardChangeEmail />
+                <button className='btn btn-primary'>change email</button>
             ),
         },
         ,
@@ -48,7 +50,7 @@ function DashboardPasswordChangeComp() {
             headerName: 'Delete Account',
             width: 150,
             renderCell: (params) => (
-                <DashboardAcountDelete id={params.row.dataId} done={done} />
+                <DashboardPhysicalAccessDelete id={params.row.dataId} done={done} />
             ),
         },
     ];
@@ -61,10 +63,10 @@ function DashboardPasswordChangeComp() {
     }));
     return (
         <>
-            <div className="col-12 d-flex justify-content-between">
-                <p className='text-capitalize mb-3 fw-semibold'>Dashboard Password change</p>
+            <div className="col-12 d-flex justify-content-between py-5">
+                <p className='text-capitalize mb-3 fw-semibold'>Physical class access</p>
                 <div className="border" style={{ gap: "20px 0px" }}>
-                    <DashboardAddAccount done={done} />
+                    <DashboardPhysicalAccess done={done} />
 
                 </div>
 
@@ -86,4 +88,4 @@ function DashboardPasswordChangeComp() {
     )
 }
 
-export default DashboardPasswordChangeComp
+export default PhysicalclassDashboard
