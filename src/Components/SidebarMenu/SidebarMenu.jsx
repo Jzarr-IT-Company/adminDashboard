@@ -12,6 +12,9 @@ function SidebarMenu() {
                     <Link className='btn btn-primary w-100 text-start py-3 text-capitalize' to={'/physicalform'}>Physical class</Link>
                 </div>
                 <div className="py-2">
+                    <Link className='btn btn-primary w-100 text-start py-3 text-capitalize' to={'/'}>Fees</Link>
+                </div>
+                <div className="py-2">
                     <Link className='btn btn-primary w-100 text-start py-3 text-capitalize' to={'/phy'}>Physical class Website from </Link>
                 </div>
                 <div className="py-2">
