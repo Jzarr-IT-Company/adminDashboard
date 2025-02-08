@@ -3,17 +3,18 @@ import { message, Spin } from 'antd';
 import axios from 'axios';
 import React, { useState } from 'react'
 
-function RejectedButtonCompo({ id, approvalFunction }) {
+function RejectedButtonCompo({ id, rejected, approvalFunction }) {
     const [loading, setloading] = useState(false);
     const handleDeleteButton = async () => {
         setloading(true)
         try {
             const response = await axios.post('https://hdpicks-main-server.vercel.app/rejectedimages', { id })
-            console.log(response.data.status)
             if (response.data.status == 200) {
-                setloading(false)
-                message.success("Rejected Successfully")
                 approvalFunction()
+                if (rejected) {
+                    message.success("Rejected Successfully")
+                    setloading(false)
+                }
             }
 
         } catch (error) {
@@ -26,8 +27,9 @@ function RejectedButtonCompo({ id, approvalFunction }) {
     return (
         <Button
             variant="contained"
-            color="error"
+            color={rejected ? "primary" : "error"}
             onClick={handleDeleteButton}
+            disabled={rejected || loading}
         >
             {loading ? <Spin /> : "Rejected"}
         </Button>

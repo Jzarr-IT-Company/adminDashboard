@@ -16,6 +16,8 @@ import SettingLogin from "./Pages/SettingLogin";
 import FaqsLogin from "./Pages/FaqsLogin";
 import PhysicalLogin from "./Pages/PhysicalLogin";
 import CheckAllImages from "./Pages/CheckAllImages";
+import PhysicalClass from "./Pages/PhysicalClass";
+import AddStudentsFormModalCompo from "./Components/AddStudentsFormModalCompo/AddStudentsFormModalCompo";
 const App = () => {
   const { userToken, settToken, paymToken, physToken, faqsToken, } = useGlobalState()
   let dashToken = Cookie.get('dashToken')
@@ -50,6 +52,8 @@ const App = () => {
         { path: '/payment', element:     <Payment />  },
         { path: '/faqs', element:  <FAQS />  },
         { path: '/phy', element: <PhysicalClassStudents />  },
+        { path: '/physicalform', element: <PhysicalClass />  },
+        { path: '/addst', element: <AddStudentsFormModalCompo />  },
         { path: '/setting', element:   <Setting />  },
         { path: '/check', element:   <CheckAllImages />  },
       ],
