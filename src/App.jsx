@@ -18,6 +18,8 @@ import PhysicalLogin from "./Pages/PhysicalLogin";
 import CheckAllImages from "./Pages/CheckAllImages";
 import PhysicalClass from "./Pages/PhysicalClass";
 import AddStudentsFormModalCompo from "./Components/AddStudentsFormModalCompo/AddStudentsFormModalCompo";
+import EditStudentData from "./Pages/EditStudentData";
+import FeePage from "./Pages/FeePage";
 const App = () => {
   const { userToken, settToken, paymToken, physToken, faqsToken, } = useGlobalState()
   let dashToken = Cookie.get('dashToken')
@@ -52,10 +54,12 @@ const App = () => {
         { path: '/payment', element:     <Payment />  },
         { path: '/faqs', element:  <FAQS />  },
         { path: '/phy', element: <PhysicalClassStudents />  },
+        { path: '/ed/:id', element: <EditStudentData />  },
         { path: '/physicalform', element: <PhysicalClass />  },
         { path: '/addst', element: <AddStudentsFormModalCompo />  },
         { path: '/setting', element:   <Setting />  },
         { path: '/check', element:   <CheckAllImages />  },
+        { path: '/fees', element:   <FeePage />  },
       ],
     },
     {

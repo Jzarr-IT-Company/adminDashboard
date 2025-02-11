@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { TextField, MenuItem, Button } from '@mui/material';
+import { TextField, MenuItem, Button, FormControl, InputLabel, Select, FormHelperText } from '@mui/material';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function AddStudentsFormModalCompo() {
     const initialFormData = {
@@ -27,7 +29,13 @@ function AddStudentsFormModalCompo() {
         amountPaid: '',
         discount: '',
         paymentMethod: '',
-        screenshot: null
+        screenshot: null,
+        city: "",
+        religion: "",
+        gender: "",
+        marital_status: "",
+        batch_no: "",
+        courses_duration: ""
     };
     const [formData, setFormData] = useState(initialFormData);
 
@@ -53,6 +61,12 @@ function AddStudentsFormModalCompo() {
         if (!formData.admissionDate) newErrors.admissionDate = "Admission Date is required.";
         if (!formData.totalAmount) newErrors.totalAmount = "Total Amount is required.";
         if (!formData.admissionStatus) newErrors.admissionStatus = "Admission Status is required.";
+        if (!formData.city) newErrors.city = "City is required.";
+        if (!formData.religion) newErrors.religion = "Religion is required.";
+        if (!formData.gender) newErrors.gender = "Gender is required.";
+        if (!formData.marital_status) newErrors.marital_status = "Marital Status is required.";
+        if (!formData.batch_no) newErrors.batch_no = "Batch No is required.";
+        if (!formData.courses_duration) newErrors.courses_duration = "Course Duration is required.";
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -80,13 +94,26 @@ function AddStudentsFormModalCompo() {
     };
 
     const handleSubmit = () => {
-        if (validateForm()) {
-            alert("Form submitted successfully!");
-            console.log(formData);
-            setFormData(initialFormData);
-            handleBack();
-        }
+        // if (validateForm()) {
+
+        //     axios.post('http://localhost:8800/addStudentsData', { formData })
+        //         .then((response) => {
+        //             console.log("response from server", response.data)
+        //         })
+        //     toast.success('Form submitted successfully!');
+        //     addFees(formData)
+        //     console.log(formData);
+        //     setFormData(initialFormData);
+        //     handleBack();
+        // }
+        addFees(formData)
     };
+
+    const addFees = async (data) => {
+
+        console.log("FEES FUNCTION", data)
+        // axios.post('http://localhost:8800/addFeesData')
+    }
 
     return (
         <div className='container mt-4'>
@@ -119,7 +146,6 @@ function AddStudentsFormModalCompo() {
                     <TextField name='whatsapp' onChange={handleChange} value={formData.whatsapp} label='WhatsApp Number' fullWidth type='tel' />
                 </div>
             </div>
-
             <div className='row mt-3'>
                 <div className='col-md-6'>
                     <TextField name='email' onChange={handleChange} value={formData.email} label='Email Address' fullWidth type='email' required error={!!errors.email} helperText={errors.email} />
@@ -127,6 +153,50 @@ function AddStudentsFormModalCompo() {
                 <div className='col-md-6'>
                     <TextField name='address' onChange={handleChange} value={formData.address} label='Home Address *' fullWidth required error={!!errors.address} helperText={errors.address} />
                 </div>
+            </div>
+            <div className='row mt-3'>
+                <div className='col-md-6'>
+                    <TextField name='city' onChange={handleChange} value={formData.city} label='City' fullWidth type='text' required error={!!errors.city} helperText={errors.city} />
+                </div>
+                <div className='col-md-6'>
+                    <TextField name='religion' onChange={handleChange} value={formData.religion} label='Religion *' fullWidth required error={!!errors.address} helperText={errors.address} />
+                </div>
+            </div>
+
+            <div className='row mt-3'>
+                <div className="col-md-6">
+                    <FormControl fullWidth error={!!errors.gender}>
+                        <InputLabel>Gender</InputLabel>
+                        <Select
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value="male">Male</MenuItem>
+                            <MenuItem value="female">Female</MenuItem>
+                            <MenuItem value="other">Other</MenuItem>
+                        </Select>
+                        <FormHelperText>{errors.gender}</FormHelperText>
+                    </FormControl>
+                </div>
+
+                <div className="col-md-6">
+                    <FormControl fullWidth error={!!errors.marital_status}>
+                        <InputLabel>Marital Status</InputLabel>
+                        <Select
+                            name="marital_status"
+                            value={formData.marital_status}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value="single">Single</MenuItem>
+                            <MenuItem value="married">Married</MenuItem>
+                            <MenuItem value="divorced">Divorced</MenuItem>
+                            <MenuItem value="widow">Widow</MenuItem>
+                        </Select>
+                        <FormHelperText>{errors.marital_status}</FormHelperText>
+                    </FormControl>
+                </div>
+
             </div>
 
             <div className='section-heading mt-5'>
@@ -163,6 +233,16 @@ function AddStudentsFormModalCompo() {
             </div>
 
             <div className='row mt-3'>
+                <div className='col-md-6'>
+                    <TextField name='courses_duration' onChange={handleChange} value={formData.courses_duration} label='Course Duration *' fullWidth required error={!!errors.courses_duration} helperText={errors.courses_duration} />
+                </div>
+                <div className='col-md-6'>
+                    <TextField name='batch_no' onChange={handleChange} value={formData.batch_no} label='Batch No *' fullWidth required error={!!errors.batch_no} helperText={errors.batch_no} />
+                </div>
+
+
+            </div>
+            <div className="row mt-3">
                 <div className='col-md-6'>
                     <TextField name='batchTiming' onChange={handleChange} value={formData.batchTiming} label='Batch Timing *' fullWidth required error={!!errors.batchTiming} helperText={errors.batchTiming} />
                 </div>
@@ -203,7 +283,7 @@ function AddStudentsFormModalCompo() {
                     <TextField name='amountPaid' onChange={handleChange} value={formData.amountPaid} label='Amount Paid (PKR) ' fullWidth type='number' />
                 </div>
                 <div className='col-md-6'>
-                    <TextField label='Remaining Balance' fullWidth disabled value={formData.totalAmount - formData.amountPaid} />
+                    <TextField label='Remaining Balance' fullWidth disabled value={formData.discountedAmount - formData.amountPaid} />
                 </div>
             </div>
 
@@ -227,7 +307,7 @@ function AddStudentsFormModalCompo() {
                 )}
                 {(formData.paymentMethod === 'easypaisa' || formData.paymentMethod === 'bank') && (
                     <div className='col-md-6'>
-                        <input type='file' accept='image/*' onChange={handleScreenshotUpload} className='form-control' />
+                        <input type='file' accept='image/*' className='form-control' />
                     </div>
                 )}
             </div>

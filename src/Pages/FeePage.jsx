@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
-function PhysicalClassFormBanner1() {
+function FeePage() {
     const [getPaymentDetails, setGetPaymentDetails] = useState([]);
     const [pageSize, setPageSize] = useState(20);
     const [loading, setLoading] = useState(false);
@@ -29,20 +29,6 @@ function PhysicalClassFormBanner1() {
                 }
             });
     }
-
-    const handleButtonClick = (id) => {
-        axios.delete(`https://admin-portal-server.vercel.app/deleteData/${id}`)
-            .then((res) => {
-                setGetPaymentDetails((prevDetails) => prevDetails.filter(item => item._id !== id));
-            })
-            .catch((error) => {
-                console.error("Error deleting data:", error);
-            });
-    };
-    const handleEdit = async (id) => {
-        navigate(`/ed/${id}`)
-        console.log(id)
-    }
     const columns = [
         { field: 'id', headerName: 'S.no', width: 90 },
         { field: 'enrollmentId', headerName: 'Enrollment ID', width: 170 },
@@ -52,35 +38,6 @@ function PhysicalClassFormBanner1() {
         { field: 'courseName', headerName: 'Course Name', width: 200 },
         { field: 'paymentMethod', headerName: 'Payment Methods', width: 200 },
         { field: 'whatsapp_number', headerName: 'Whatsapp Number', width: 200 },
-        {
-            field: 'edit',
-            headerName: 'Edit',
-            width: 150,
-            renderCell: (params) => (
-                <Button
-                    variant="contained"
-                    // color="error"
-                    onClick={() => handleEdit(params.row.dataId)}
-                >
-                    Edit
-                </Button>
-            ),
-        },
-        {
-            field: 'deleteBtn',
-            headerName: 'Removed',
-            width: 150,
-            renderCell: (params) => (
-                <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => handleButtonClick(params.row.dataId)}
-                >
-                    Delete
-                </Button>
-            ),
-        },
-
     ];
 
     const rows = getPaymentDetails.map((data, index) => ({
@@ -114,20 +71,12 @@ function PhysicalClassFormBanner1() {
     const handleBttn = () => {
         navigate('/addst')
     }
+
     return (
         <div className="container-fluid mt-5">
             <div className="d-flex justify-content-between">
-                <h4>Physical Students</h4>
+                <h4>Students Fees Section</h4>
                 <div className='d-flex align-items-center'>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleBttn}
-                        style={{ marginBottom: '20px' }}
-                        className='me-2'
-                    >
-                        Add
-                    </Button>
                     <Button
                         variant="contained"
                         color="primary"
@@ -163,4 +112,4 @@ function PhysicalClassFormBanner1() {
     )
 }
 
-export default PhysicalClassFormBanner1
+export default FeePage
