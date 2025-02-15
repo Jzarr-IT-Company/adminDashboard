@@ -50,7 +50,7 @@ function EditStudentData() {
 
     const fetchStudentData = async () => {
         try {
-            const res = await axios.get("http://localhost:8800/getAllStudentsDatas");
+            const res = await axios.get("https://main-server-zeta.vercel.app/getAllStudentsDatas");
             if (res.data.status === 200) {
                 const filteredData = res.data.data.find((data) => data._id === id);
                 if (filteredData) {
@@ -106,7 +106,7 @@ function EditStudentData() {
         e.preventDefault();
         console.log(id, formData)
         try {
-            const res = await axios.post(`http://localhost:8800/updateStudentData`, { id, formData });
+            const res = await axios.post(`https://main-server-zeta.vercel.app/updateStudentData`, { id, formData });
             if (res.data.status === 200) {
                 toast.success("Student data updated successfully!");
             } else {

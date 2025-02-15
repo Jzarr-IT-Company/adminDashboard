@@ -20,7 +20,6 @@ function Setting() {
         <h3 className='mb-3'>Setting</h3>
         <div className="row">
           <DashboardPasswordChangeComp />
-          <PhysicalclassDashboard/>
           <button onClick={handle}>delete</button>
         </div>
       </div>

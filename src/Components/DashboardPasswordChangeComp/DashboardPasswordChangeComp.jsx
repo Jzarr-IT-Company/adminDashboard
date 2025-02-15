@@ -10,9 +10,10 @@ function DashboardPasswordChangeComp() {
     const [getPaymentDetails, setGetPaymentDetails] = useState([]);
     const [pageSize, setPageSize] = useState(20);
     useEffect(() => {
-        axios('http://localhost:4040/getDashboardAccessData')
+        axios('http://localhost:8800/getStaffData')
             .then(async (res) => {
                 setGetPaymentDetails(res.data.data);
+                console.log(res.data.data);
             });
     }, []);
     const done = () => {
@@ -65,7 +66,6 @@ function DashboardPasswordChangeComp() {
                 <p className='text-capitalize mb-3 fw-semibold'>Dashboard Password change</p>
                 <div className="border" style={{ gap: "20px 0px" }}>
                     <DashboardAddAccount done={done} />
-
                 </div>
 
             </div>

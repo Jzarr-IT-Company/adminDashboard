@@ -35,7 +35,9 @@ function AddStudentsFormModalCompo() {
         gender: "",
         marital_status: "",
         batch_no: "",
-        courses_duration: ""
+        courses_duration: "",
+        remainingBalance: "",
+        isPaid: false,
     };
     const [formData, setFormData] = useState(initialFormData);
 
@@ -83,6 +85,7 @@ function AddStudentsFormModalCompo() {
         const uniqueId = generateUniqueEnrollmentId();
         setFormData({ ...formData, enrollmentId: uniqueId });
     }, [])
+    // 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -93,26 +96,61 @@ function AddStudentsFormModalCompo() {
         window.scroll(0, 0);
     };
 
-    const handleSubmit = () => {
-        // if (validateForm()) {
+    // const handleSubmit = () => {
+    //     setFormData({ ...formData, remainingBalance: formData.discountedAmount - formData.amountPaid });
+    //     if (validateForm()) {
 
-        //     axios.post('http://localhost:8800/addStudentsData', { formData })
-        //         .then((response) => {
-        //             console.log("response from server", response.data)
-        //         })
-        //     toast.success('Form submitted successfully!');
-        //     addFees(formData)
-        //     console.log(formData);
-        //     setFormData(initialFormData);
-        //     handleBack();
-        // }
-        addFees(formData)
+    //         axios.post('http://localhost:8800/addStudentsData', { formData })
+    //             .then((response) => {
+    //                 console.log("response from server", response.data)
+    //             })
+    //         addFees(formData)
+    //         toast.success('Form submitted successfully!');
+    //         setFormData(initialFormData);
+    //         handleBack();
+    //     }
+
+    // };
+
+
+    const handleSubmit = () => {
+        if (formData.amountPaid) {
+            setFormData({ ...formData, remainingBalance: formData.discountedAmount - formData.amountPaid, isPaid: true });
+        } else {
+            setFormData({ ...formData, remainingBalance: formData.discountedAmount - formData.amountPaid });
+        }
+        if (validateForm()) {
+            axios.post('https://main-server-zeta.vercel.app/addStudentsData', { formData })
+                .then((response) => {
+                    console.log("response from server", response.data)
+                    toast.success('Form submitted successfully!');
+                    setFormData(initialFormData);
+                    // handleBack();
+                })
+                .catch((error) => {
+                    console.error("Error submitting form: ", error);
+                    toast.error('Something went wrong. Please try again later.');
+                });
+
+            addFees(formData);
+        }
     };
 
     const addFees = async (data) => {
-
-        console.log("FEES FUNCTION", data)
-        // axios.post('http://localhost:8800/addFeesData')
+        const obj = {
+            students_name: data.fullName,
+            courses_name: data.courseName,
+            enrollmentId: data.enrollmentId,
+            join_date: data.admissionDate,
+            courses_duration: data.courses_duration,
+            batch_no: data.batch_no,
+            total_fee: data.totalAmount,
+            amountPaid: data.amountPaid || '-',
+            fee_status: data?.remainingBalance ? data.remainingBalance : "Paid",
+            remaining_fees: data.remainingBalance
+        }
+        console.log("FEES FUNCTION", obj)
+        axios.post('https://main-server-zeta.vercel.app/addFeesData', { data: obj })
     }
 
     return (
@@ -280,10 +318,10 @@ function AddStudentsFormModalCompo() {
 
             <div className='row mt-3'>
                 <div className='col-md-6'>
-                    <TextField name='amountPaid' onChange={handleChange} value={formData.amountPaid} label='Amount Paid (PKR) ' fullWidth type='number' />
+                    <TextField name='amountPaid' onChange={handleChange} value={formData.amountPaid} label='Amount Paid (PKR)' fullWidth type='number' />
                 </div>
                 <div className='col-md-6'>
-                    <TextField label='Remaining Balance' fullWidth disabled value={formData.discountedAmount - formData.amountPaid} />
+                    <TextField label='Remaining Balance' fullWidth disabled value={formData.discountedAmount - formData.amountPaid} onChange={handleChange} />
                 </div>
             </div>
 

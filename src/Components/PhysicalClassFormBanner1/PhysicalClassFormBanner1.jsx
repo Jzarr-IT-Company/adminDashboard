@@ -20,7 +20,7 @@ function PhysicalClassFormBanner1() {
 
     const refreshBtn = async () => {
         setLoading(true)
-        axios('http://localhost:8800/getAllStudentsDatas')
+        axios('https://main-server-zeta.vercel.app/getAllStudentsDatas')
             .then(async (res) => {
                 if (res.data.status == 200) {
                     setGetPaymentDetails(res.data.data);
